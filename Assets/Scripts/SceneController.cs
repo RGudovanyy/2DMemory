@@ -7,8 +7,8 @@ public class SceneController : MonoBehaviour {
 	[SerializeField] private TextMesh turnsLabel;
 
 	public const int gridRows = 2; // Количество строк
-	public const int gridCols = 5; // Количество столбцов
-	public const float offsetX = 1.5f;
+	public const int gridCols = 7; // Количество столбцов
+	public const float offsetX = 1.6f;
 	public const float offsetY = 2.5f;
 
 	private MemoryCard _firstRevealed;
@@ -22,9 +22,10 @@ public class SceneController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Screen.orientation = ScreenOrientation.LandscapeRight;
 		Vector3 startPos = originalCard.transform.position; // Положение первой карты, от которой высчитываются остальные
 		// Массив с парами идентификаторов для всех спрайтов с изображениями карт
-		int[] numbers = {0,0,1,1,2,2,3,3,4,4};
+		int[] numbers = {0,0,1,1,2,2,3,3,4,4,5,5,6,6};
 
 		// Перемешиваем массив
 		numbers = ShuffleArray(numbers);
@@ -48,6 +49,11 @@ public class SceneController : MonoBehaviour {
 				card.transform.position = new Vector3(posX, posY, startPos.z);
 			}
 		}
+	}
+
+	void Update(){
+		if (Input.GetKeyDown (KeyCode.Escape))
+			Application.Quit ();
 	}
 
 	public void CardRevealed(MemoryCard card){
